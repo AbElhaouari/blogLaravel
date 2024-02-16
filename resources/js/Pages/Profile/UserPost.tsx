@@ -2,7 +2,8 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link } from "@inertiajs/react";
 import React from "react";
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
 function UserPost({ posts, auth }) {
     return (
         <div>
@@ -20,7 +21,13 @@ function UserPost({ posts, auth }) {
                         return (
                             <div className="flex flex-col p-8 rounded-lg shadow-2xl gap-7 ">
                                 <div>{e.title}</div>
-                                <div>{e.body}</div>
+                                <div>
+                                    <ReactQuill
+                                        readOnly={true}
+                                        value={e.body}
+                                        theme="bubble"
+                                    />
+                                </div>
                                 <div>{auth.user.name}</div>
                             </div>
                         );
