@@ -19,10 +19,10 @@ class ProfileController extends Controller
 {
     public function index($id){
         $user = User::find($id);
-        error_log($user);
          $posts = DB::table('posts')->where('user_id',$user->id)->get();
         return Inertia::render('Profile/UserPost',[
-            'posts'=>$posts
+            'posts'=>$posts,
+            'userid'=>$user
         ]);
     }
     /**
