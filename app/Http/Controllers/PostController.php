@@ -51,6 +51,14 @@ class PostController extends Controller
        $post->body = $request->input('body');
        $post->update();
        
-        return redirect()->route('posts.index')->with("success",'updated');
+        return redirect()->route('dashboard')->with("success",'updated');
+    }
+    public function destroy( $id)  {
+        $post=Post::find($id);
+        
+        $post->delete();
+
+        
+        return redirect()->route('dashboard')->with("success","deleted");
     }
 }
