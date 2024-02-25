@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
+use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,9 +15,11 @@ use function Laravel\Prompts\select;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::all();
-         return Inertia::render('Posts/All',[
-            'posts'=>$posts
+        $posts = DB::table('posts')->orderByDesc('created_at')->paginate();
+        $username = User::select('id' ,'name')->get();
+         return Inertia::render('MainPage',[
+            'posts'=>$posts,
+            'userInfo'=>$username
          ]);
     }
     public function create(){

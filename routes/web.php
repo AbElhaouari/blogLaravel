@@ -18,7 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('MainPage', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/posts',[PostController::class ,'index'])->name('posts.index');
+Route::get('/',[PostController::class ,'index'])->name('posts.index');
 
 Route::get('/posts/createpost' , [PostController::class,'create'] )->name('createpost');
 Route::post('/posts',[PostController::class , 'store'] )->name('posts.store'); 
